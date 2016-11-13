@@ -38,4 +38,25 @@ class User extends Authenticatable
     {
         return $query->where('first_name', $first_name);
     }
+
+
+    /**
+     * Returns the users book.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function books()
+    {
+        return $this->hasMany('App\Book');
+    }
+
+    /**
+     * Returns the users bookshelves.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function bookshelves()
+    {
+        return $this->hasMany('App\Bookshelf');
+    }
 }
