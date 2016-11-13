@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'password', 'avatar',
     ];
 
     /**
@@ -26,4 +26,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+     /**
+     * Scope a query to grab users with name passed in..
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $first_name
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFirstName($query, $first_name)
+    {
+        return $query->where('first_name', $first_name);
+    }
 }
