@@ -42,4 +42,14 @@ class Book extends Model
     {
         return $this->belongsTo('App\Genre');
     }
+
+    /**
+     * Returns the book's parent bookshelves.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function bookshelves()
+    {
+        return $this->belongsToMany('App\Bookshelf', 'books_bookshelves', 'books_id','bookshelves_id');
+    }
 }

@@ -14,5 +14,26 @@ class Bookshelf extends Model
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['title', 'user_id'];
+
+
+    /**
+     * Returns the bookshelf's user.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Returns the bookshelf's user.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function books()
+    {
+        return $this->belongsToMany('App\Book', 'books_bookshelves', 'bookshelves_id', 'books_id');
+    }
 }
