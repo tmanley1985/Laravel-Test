@@ -25,3 +25,8 @@ Route::post('bookshelves/{bookshelf}/add', 'BookshelfController@add');
 Route::post('/avatars', 'AvatarsController@store');
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/test', function(){
+
+	dd(App\Facades\Helpers::castArrayValuesToLowerCase(['A','B']));
+});
