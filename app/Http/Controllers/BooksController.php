@@ -18,7 +18,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $books = Auth::user()->books;
+        $books = Auth::user()->books()->simplePaginate(2);
         
         return view('books.index', compact('books'));
     }
