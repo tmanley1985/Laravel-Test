@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Genre;
+use App\Book;
+use App\Author;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -13,7 +17,9 @@ class BooksController extends Controller
      */
     public function index()
     {
-        //
+        $books = Auth::user()->books;
+        
+        return view('books.index', compact('books'));
     }
 
     /**
@@ -23,7 +29,7 @@ class BooksController extends Controller
      */
     public function create()
     {
-        //
+        return view('books.create');
     }
 
     /**
@@ -34,7 +40,40 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        extract($request->input());
+
+        $author_record = Author::where('name', $author )->first();
+
+        if ($author_record != null) {
+
+            $author_id = $author_record->id;
+
+        } else {
+
+            $author_id = Author::create(['name' => $author])->id;
+        }
+
+        $genre_record = Genre::where('type', $genre)->first();
+
+        if ($genre_record != null) {
+
+            $genre_id = $genre_record->id;
+
+        } else {
+
+            $genre_id = Author::create(['type' => $genre])->id;
+        }
+
+        $book = Book::create([
+            'title' => $title, 
+            'user_id' => Auth::user()->id,
+            'genre_id' => $genre_id,
+            'author_id' => $author_id
+        ]);
+
+        return redirect('/books');
+
+
     }
 
     /**
@@ -43,9 +82,9 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Book $book)
     {
-        //
+        return view('books.show', compact('book'));
     }
 
     /**
@@ -56,7 +95,10 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $book = Book::find($id);
+
+        return view('books.edit', compact('book'));
     }
 
     /**
@@ -66,9 +108,42 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Book $book)
     {
-        //
+        extract($request->input());
+
+        $author_record = Author::where('name', $author )->first();
+
+        if ($author_record != null) {
+
+            $author_id = $author_record->id;
+
+        } else {
+
+            $author_id = Author::create(['name' => $author])->id;
+        }
+
+        $genre_record = Genre::where('type', $genre)->first();
+
+        if ($genre_record != null) {
+
+            $genre_id = $genre_record->id;
+
+        } else {
+
+            $genre_id = Author::create(['type' => $genre])->id;
+        }
+
+
+        $book->title = $title;
+
+        $book->author_id = $author_id;
+
+        $book->genre_id = $genre_id;
+
+        $book->save();
+
+        return redirect('/books');
     }
 
     /**
@@ -77,8 +152,11 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-        //
+        $book->delete();
+
+        return redirect('/books');
+
     }
 }

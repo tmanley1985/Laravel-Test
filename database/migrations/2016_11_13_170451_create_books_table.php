@@ -13,15 +13,19 @@ class CreateBooksTable extends Migration
      */
     public function up()
     {
-        $table->increments('id');
-        $table->string('title');
-        $table->integer('author_id')->unsigned();
-        $table->integer('genre_id')->unsigned();
-        $table->rememberToken();
-        $table->timestamps();
+        Schema::create('books', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->integer('author_id')->unsigned();
+            $table->integer('genre_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->rememberToken();
+            $table->timestamps();
 
-        $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
-        $table->foreign('genre_id')->references('id')->on('generes')->onDelete('cascade');
+            $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
+            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**
@@ -31,6 +35,6 @@ class CreateBooksTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('books');
     }
 }
