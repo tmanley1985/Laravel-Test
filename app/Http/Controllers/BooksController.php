@@ -6,6 +6,7 @@ use Auth;
 use App\Genre;
 use App\Book;
 use App\Author;
+use App\Policies\BookPolicy;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -111,6 +112,8 @@ class BooksController extends Controller
     public function update(Request $request, Book $book)
     {
         extract($request->input());
+
+
 
         $author_record = Author::where('name', $author )->first();
 
