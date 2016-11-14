@@ -40,6 +40,23 @@ class User extends Authenticatable
     }
 
 
+
+    /**
+     * Accessor a query to grab thumbnail.
+     *
+     * @param string $first_name
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function getAvatarAttribute($value)
+    {
+
+        $file_array = explode('/', $value);
+
+        $file_name = $file_array[1];
+
+        return $file_array[0] . '/tm_' . $file_name;
+    }
+
     /**
      * Returns the users book.
      * 

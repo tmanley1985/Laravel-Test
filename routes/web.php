@@ -17,8 +17,11 @@ Route::get('/', function () {
 });
 
 Route::resource('books', 'BooksController');
+
 Route::resource('bookshelves', 'BookshelfController');
+
 Route::post('bookshelves/{bookshelf}/add', 'BookshelfController@add');
 
+Route::post('/avatars', 'AvatarsController@store');
 
 Route::get('/home', 'HomeController@index');

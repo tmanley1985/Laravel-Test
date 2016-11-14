@@ -5784,4 +5784,15 @@ button.close {
     justify-content: space-between;
     align-content: center; }
 
+.flex-column {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column; }
+
 /*# sourceMappingURL=app.css.map */
