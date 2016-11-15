@@ -6,6 +6,7 @@ use Auth;
 use App\Genre;
 use App\Book;
 use App\Author;
+use App\Events\BookAdded;
 use App\Policies\BookPolicy;
 use Illuminate\Http\Request;
 
@@ -71,6 +72,8 @@ class BooksController extends Controller
             'genre_id' => $genre_id,
             'author_id' => $author_id
         ]);
+
+        event(new BookAdded($book));
 
         return redirect('/books');
 
