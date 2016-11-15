@@ -2,9 +2,10 @@
 
 namespace App;
 
+use App\Elegant;
 use Illuminate\Database\Eloquent\Model;
 
-class Bookshelf extends Model
+class Bookshelf extends Elegant
 {
     /** @type string $table **/
     protected $table = 'bookshelves';
@@ -15,6 +16,14 @@ class Bookshelf extends Model
      * @var array
      */
     protected $fillable = ['title', 'user_id'];
+
+     /** @type array $rules */
+
+    protected $rules = array(
+        'title' => 'required|alpha|min:3',
+        'user_id'  => 'required|numeric',
+        
+    );
 
 
     /**

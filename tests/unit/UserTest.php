@@ -34,5 +34,4 @@ class UserTest extends TestCase
 
         $this->assertNotNull($books);
     }
-
 }

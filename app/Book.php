@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Elegant;
 
-class Book extends Model
+class Book extends Elegant
 {
     /**
      * The attributes that are mass assignable.
@@ -12,6 +12,16 @@ class Book extends Model
      * @var array
      */
     protected $fillable = ['title', 'user_id', 'author_id', 'genre_id'];
+
+    /** @type array $rules */
+
+    protected $rules = array(
+        'title' => 'notNull|regex:/^[A-Za-z0-9]+$/|min:3',
+        'user_id'  => 'required|numeric',
+        'author_id'  => 'required|numeric',
+        'genre_id'  => 'required|numeric',
+        
+    );
 
     /**
      * Returns the book's user.
