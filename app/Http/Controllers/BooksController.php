@@ -6,6 +6,7 @@ use Auth;
 use App\Genre;
 use App\Book;
 use App\Author;
+use App\Jobs\CountBooks;
 use App\Events\BookAdded;
 use App\Policies\BookPolicy;
 use Illuminate\Http\Request;
@@ -74,6 +75,8 @@ class BooksController extends Controller
         ]);
 
         event(new BookAdded($book));
+
+        dispatch(new CountBooks(Auth::user()));
 
         return redirect('/books');
 

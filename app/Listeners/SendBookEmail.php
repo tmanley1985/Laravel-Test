@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\BookAdded;
+use App\Mail\YouAddedABook;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -26,6 +27,9 @@ class SendBookEmail
      */
     public function handle(BookAdded $book)
     {
-        var_dump($book);
+        $email = $book->user()->email;
+
+        Mail::to($email)->queue(new YouAddedABook());
+        
     }
 }
