@@ -39,8 +39,6 @@ class User extends Authenticatable
         return $query->where('first_name', $first_name);
     }
 
-
-
     /**
      * Accessor a query to grab thumbnail.
      *

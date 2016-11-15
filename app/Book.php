@@ -34,6 +34,16 @@ class Book extends Model
     }
 
     /**
+     * Returns the book's favorites.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function favorites()
+    {
+        return $this->morphMany('App\Favorite', 'favoritable');
+    }
+
+    /**
      * Returns the book's genre.
      * 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
