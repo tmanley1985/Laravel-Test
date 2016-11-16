@@ -1,0 +1,11 @@
+{
+    "name": "manley/templatr",
+    "description": "A templating engine",
+    "authors": [
+        {
+            "name": "tmanley1985",
+            "email": "tmanley1985@gmail.com"
+        }
+    ],
+    "require": {}
+}
