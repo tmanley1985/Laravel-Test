@@ -32,6 +32,6 @@ class CountBooks implements ShouldQueue
      */
     public function handle()
     {
-        var_dump(count($user->books));
+        var_dump(count($this->user->books));
     }
 }

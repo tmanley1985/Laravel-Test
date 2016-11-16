@@ -27,9 +27,9 @@ class SendBookEmail
      */
     public function handle(BookAdded $book)
     {
-        $email = $book->user()->email;
+        // $email = $book->user()->email;
 
-        Mail::to($email)->queue(new YouAddedABook());
+        // Mail::to($email)->queue(new YouAddedABook());
         
     }
 }

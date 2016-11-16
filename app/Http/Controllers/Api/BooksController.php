@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use Log;
 use Auth;
 use App\Genre;
 use App\Book;
 use App\Author;
 use App\Jobs\CountBooks;
+use App\ApiConsumer as Consumer;
 use App\Http\Controllers\Controller;
 use App\Events\BookAdded;
 use App\Policies\BookPolicy;
@@ -19,8 +21,25 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        extract($request->input());
+
+
+        $authenticated = $this->validateConsumer([
+            'api_key' => $api_key,
+            'data' => $data,
+            'hashed' => $hashed
+        ]);
+
+        if ($authenticated == false) {
+
+            return response()->json([
+                'status' => false,
+                'message' => 'You do not have access to this resource!'
+
+            ], 200);
+        }
         $books = Book::all();
         
         return response()->json([
@@ -31,6 +50,37 @@ class BooksController extends Controller
     }
 
     /**
+     * Validates the incoming request.
+     * 
+     * @param  array $consumer_info Array of api_key, data, hashed data.
+     * 
+     * @return bool
+     */
+    public function validateConsumer($consumer_info)
+    {
+        extract($consumer_info);
+
+        // Find the consumer using their api key.
+        $consumer = Consumer::where('api_key', $api_key)->first();
+
+        // Get the secret.
+        $secret = $consumer->secret;
+        // use sha256 to hash the data with their secret.
+
+        $newly_hashed_data = hash_hmac('sha256', $data, $secret);
+
+        // Return false if the newly hashed data is not the same as the hashed data sent along
+        
+        if ($newly_hashed_data != $hashed) {
+            return false;
+        }
+
+        return true;
+        
+    }
+
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -39,6 +89,25 @@ class BooksController extends Controller
     public function store(Request $request)
     {
         extract($request->input());
+
+
+        $authenticated = $this->validateConsumer([
+            'api_key' => $api_key,
+            'data' => $data,
+            'hashed' => $hashed
+        ]);
+
+        if ($authenticated == false) {
+
+            return response()->json([
+                'status' => false,
+                'message' => 'You do not have access to this resource!'
+
+            ], 200);
+        }
+
+        extract(json_decode($data, true));
+        
 
         $author_record = Author::where('name', $author )->first();
 
@@ -64,14 +133,10 @@ class BooksController extends Controller
 
         $book = Book::create([
             'title' => $title, 
-            'user_id' => Auth::user()->id,
+            'user_id' => $user_id,
             'genre_id' => $genre_id,
             'author_id' => $author_id
         ]);
-
-        event(new BookAdded($book));
-
-        dispatch(new CountBooks(Auth::user()));
 
         return response()->json([
             'status' => true,
@@ -88,8 +153,25 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show(Request $request, Book $book)
     {
+        extract($request->input());
+
+         $authenticated = $this->validateConsumer([
+            'api_key' => $api_key,
+            'data' => $data,
+            'hashed' => $hashed
+        ]);
+
+        if ($authenticated == false) {
+
+            return response()->json([
+                'status' => false,
+                'message' => 'You do not have access to this resource!'
+
+            ], 200);
+        }
+
         return response()->json([
             'status' => true,
             'data' => $book
@@ -108,7 +190,22 @@ class BooksController extends Controller
     {
         extract($request->input());
 
+        $authenticated = $this->validateConsumer([
+            'api_key' => $api_key,
+            'data' => $data,
+            'hashed' => $hashed
+        ]);
 
+        if ($authenticated == false) {
+
+            return response()->json([
+                'status' => false,
+                'message' => 'You do not have access to this resource!'
+
+            ], 200);
+        }
+
+        extract(json_decode($data, true));
 
         $author_record = Author::where('name', $author )->first();
 
@@ -165,6 +262,21 @@ class BooksController extends Controller
      */
     public function destroy(Book $book)
     {
+        $authenticated = $this->validateConsumer([
+            'api_key' => $api_key,
+            'data' => $data,
+            'hashed' => $hashed
+        ]);
+
+        if ($authenticated == false) {
+
+            return response()->json([
+                'status' => false,
+                'message' => 'You do not have access to this resource!'
+
+            ], 200);
+        }
+
         $book->delete();
 
         return response()->json([
