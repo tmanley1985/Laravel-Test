@@ -12,8 +12,14 @@
                     <a href="/books/create">Add Book</a>
 
                     <a href="/bookshelves">Bookshelves</a>
-                    <a href="/bookshelves/create">Bookshelves</a>
-                    <img src="{{Storage::url(Auth::user()->avatar)}}">
+                    <a href="/bookshelves/create">Add Bookshelf</a>
+
+                    @if(isset(Auth::user()->avatar))
+
+                        <img src="{{Auth::user()->avatar}}">
+
+                    @endif
+
                     <form class="form-horizontal" method="POST" action="/avatars" enctype="multipart/form-data">
 
                         {{ csrf_field() }}

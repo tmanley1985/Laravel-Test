@@ -30,3 +30,6 @@ Route::get('/test', function(){
 
 	dd(App\Facades\Helpers::castArrayValuesToLowerCase(['A','B']));
 });
+
+Route::get('/api-register', 'ApiRegistrationController@create');
+Route::post('/api-register', 'ApiRegistrationController@register');

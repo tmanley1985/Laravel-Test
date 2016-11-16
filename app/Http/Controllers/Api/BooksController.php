@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Auth;
 use App\Genre;
 use App\Book;
 use App\Author;
 use App\Jobs\CountBooks;
+use App\Http\Controllers\Controller;
 use App\Events\BookAdded;
 use App\Policies\BookPolicy;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $books = Auth::user()->books;
+        $books = Book::all();
         
         return response()->json([
             'status' => true,
