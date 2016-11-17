@@ -33,3 +33,14 @@ Route::get('/test', function(){
 
 Route::get('/api-register', 'ApiRegistrationController@create');
 Route::post('/api-register', 'ApiRegistrationController@register');
+
+Route::get('/gui', function(){
+	$table = [
+			'names' => [ 'Thomas', 'Elizabeth'],
+			'ages' => ['31', '26'],
+
+
+		];
+
+	return view('gui.show', compact('table'));
+});

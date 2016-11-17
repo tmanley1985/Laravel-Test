@@ -1,0 +1,1 @@
+<input class="{{$classList}}" type="text" name="{{$name}}" placeholder="{{$placeholder}}">

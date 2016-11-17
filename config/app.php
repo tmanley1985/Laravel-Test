@@ -166,6 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Manley\Templatr\TemplatrServiceProvider::class,
 
         //
 
@@ -179,6 +180,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\HelpersServiceProvider::class,
+        App\Providers\CollectionExtensions::class,
 
     ],
 
