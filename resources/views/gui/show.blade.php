@@ -2,7 +2,10 @@
 
 @section('content')
 
+	<div class="container">
+		
 	{!! \Manley\Templatr\GuiLibrary\Dropdown::make($dropdown["links"], $dropdown["classList"]) !!}
+	</div>
 
 	{!! \Manley\Templatr\GuiLibrary\Table::make($table, []) !!}
 
@@ -22,5 +25,7 @@
 		</form>
 
 	</div>
+
+
 
 @endsection

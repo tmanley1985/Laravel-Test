@@ -44,7 +44,7 @@ Route::get('/gui', function(){
 		];
 
 
-	$link = ['target' => 'http://mybrary.local/gui', 'text' => 'GUI Home', 'options' => ['btn', 'btn-primary']];
+	$link = ['target' => 'http://mybrary.local/gui', 'text' => 'GUI Home', 'options' => ['change-text','btn', 'btn-primary']];
 
 	$label = ['for' => 'email', 'label' => 'Email', 'classList' => []];
 
@@ -55,18 +55,18 @@ Route::get('/gui', function(){
 			[
 				'main' => ['href' => '/', 'text' => 'GuiHome'],
 				'dropdown' => [
-					['href' => '/', 'text' => 'Home'],
-					['href' => '/', 'text' => 'Home']
+					['href' => '/', 'text' => 'Link'],
+					['href' => '/', 'text' => 'Another Link']
 
 				]
 
 			],
 
 			[
-				'main' => ['href' => '/', 'text' => 'Home'],
+				'main' => ['href' => '/', 'text' => 'Somewhere'],
 				'dropdown' => [
-					['href' => '/', 'text' => 'Home'],
-					['href' => '/', 'text' => 'Home']
+					['href' => '/', 'text' => 'Here'],
+					['href' => '/', 'text' => 'There']
 
 				]
 

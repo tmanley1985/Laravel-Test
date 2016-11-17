@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/vendor/templatr/templatr.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -85,5 +86,6 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script src="/vendor/templatr/templatr.js" type="text/javascript" charset="utf-8" ></script>
 </body>
 </html>
