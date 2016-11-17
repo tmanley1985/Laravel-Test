@@ -50,5 +50,33 @@ Route::get('/gui', function(){
 
 	$input = ['name' => 'email', 'placeholder' => 'Email', 'classList' => ['form-control']];
 
-	return view('gui.show', compact('table', 'link', 'label', 'input'));
+	$dropdown = [
+		'links' => [
+			[
+				'main' => ['href' => '/', 'text' => 'GuiHome'],
+				'dropdown' => [
+					['href' => '/', 'text' => 'Home'],
+					['href' => '/', 'text' => 'Home']
+
+				]
+
+			],
+
+			[
+				'main' => ['href' => '/', 'text' => 'Home'],
+				'dropdown' => [
+					['href' => '/', 'text' => 'Home'],
+					['href' => '/', 'text' => 'Home']
+
+				]
+
+			],
+		],
+			
+		'classList' => ['dropdown']
+
+
+		];
+
+	return view('gui.show', compact('table', 'link', 'label', 'input', 'dropdown'));
 });
