@@ -14,12 +14,12 @@
 
 			{!! \Manley\Templatr\GuiLibrary\label::make($label["for"], $label["label"], $label["classList"]) !!}
 				
-				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+			{!! \Manley\Templatr\GuiLibrary\textfield::make($input["name"], $input["placeholder"], $input["classList"]) !!}
 			</div>
 			
 			<button type="submit" class="btn btn-default">Submit</button>
 		</form>
 
 	</div>
-	
+
 @endsection

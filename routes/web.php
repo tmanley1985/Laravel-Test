@@ -48,6 +48,7 @@ Route::get('/gui', function(){
 
 	$label = ['for' => 'email', 'label' => 'Email', 'classList' => []];
 
+	$input = ['name' => 'email', 'placeholder' => 'Email', 'classList' => ['form-control']];
 
-	return view('gui.show', compact('table', 'link', 'label'));
+	return view('gui.show', compact('table', 'link', 'label', 'input'));
 });
