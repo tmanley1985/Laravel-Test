@@ -1,1 +1,1 @@
-<label for="{{$name}}">{{$label}}</label>
+<label class="{{$classList}}" for="{{$for}}">{{$label}}</label>

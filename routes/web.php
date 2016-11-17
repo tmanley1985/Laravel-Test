@@ -46,5 +46,8 @@ Route::get('/gui', function(){
 
 	$link = ['target' => 'http://mybrary.local/gui', 'text' => 'GUI Home', 'options' => ['btn', 'btn-primary']];
 
-	return view('gui.show', compact('table', 'link'));
+	$label = ['for' => 'email', 'label' => 'Email', 'classList' => []];
+
+
+	return view('gui.show', compact('table', 'link', 'label'));
 });
