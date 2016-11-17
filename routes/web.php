@@ -35,6 +35,7 @@ Route::get('/api-register', 'ApiRegistrationController@create');
 Route::post('/api-register', 'ApiRegistrationController@register');
 
 Route::get('/gui', function(){
+
 	$table = [
 			'names' => [ 'Thomas', 'Elizabeth'],
 			'ages' => ['31', '26'],
@@ -42,5 +43,8 @@ Route::get('/gui', function(){
 
 		];
 
-	return view('gui.show', compact('table'));
+
+	$link = ['target' => 'http://mybrary.local/gui', 'text' => 'GUI Home', 'options' => ['btn', 'btn-primary']];
+
+	return view('gui.show', compact('table', 'link'));
 });
